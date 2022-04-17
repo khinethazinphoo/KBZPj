@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_Calendar" EntityType="DataModel.tbl_Calendar" />
+    <EntitySet Name="tbl_Employee" EntityType="DataModel.tbl_Employee" />
+    <EntitySet Name="tbl_LeaveRequest" EntityType="DataModel.tbl_LeaveRequest" />
+    <EntitySet Name="tbl_PublicHolidays" EntityType="DataModel.tbl_PublicHolidays" />
+    <EntitySet Name="Vw_Calendar" EntityType="DataModel.Vw_Calendar" />
+  </EntityContainer>
+  <EntityType Name="tbl_Calendar">
+    <Key>
+      <PropertyRef Name="CalendarId" />
+    </Key>
+    <Property Name="CalendarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="LeaveType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreadedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_LeaveRequest">
+    <Key>
+      <PropertyRef Name="LeaveRequestId" />
+    </Key>
+    <Property Name="LeaveRequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LeaveType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreadedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_PublicHolidays">
+    <Key>
+      <PropertyRef Name="PublicHolidaysId" />
+    </Key>
+    <Property Name="PublicHolidaysId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Vw_Calendar">
+    <Key>
+      <PropertyRef Name="LeaveRequestId" />
+      <PropertyRef Name="PublicHolidaysId" />
+    </Key>
+    <Property Name="Expr1" Type="DateTime" Precision="3" />
+    <Property Name="LeaveRequestId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LeaveType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Sign" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Approve" Type="Boolean" />
+    <Property Name="Reject" Type="Boolean" />
+    <Property Name="CreadedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PublicHolidaysId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_Calendar">
+    <Key>
+      <PropertyRef Name="CalendarId" />
+    </Key>
+    <Property Name="CalendarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="LeaveType" Type="nvarchar" MaxLength="20" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+    <Property Name="EndDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Age" Type="int" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreadedDateTime" Type="datetime" />
+    <Property Name="UpdatedDateTime" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_LeaveRequest">
+    <Key>
+      <PropertyRef Name="LeaveRequestId" />
+    </Key>
+    <Property Name="LeaveRequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+    <Property Name="LeaveType" Type="nvarchar" MaxLength="20" />
+    <Property Name="FromDate" Type="datetime" />
+    <Property Name="ToDate" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreadedDateTime" Type="datetime" />
+    <Property Name="UpdatedDateTime" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_PublicHolidays">
+    <Key>
+      <PropertyRef Name="PublicHolidaysId" />
+    </Key>
+    <Property Name="PublicHolidaysId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'KBZPj.dbo.Vw_Calendar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Vw_Calendar">
+    <Key>
+      <PropertyRef Name="LeaveRequestId" />
+      <PropertyRef Name="PublicHolidaysId" />
+    </Key>
+    <Property Name="Expr1" Type="datetime" />
+    <Property Name="LeaveRequestId" Type="int" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+    <Property Name="LeaveType" Type="nvarchar" MaxLength="20" />
+    <Property Name="FromDate" Type="datetime" />
+    <Property Name="ToDate" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="200" />
+    <Property Name="Sign" Type="nchar" MaxLength="10" />
+    <Property Name="Approve" Type="bit" />
+    <Property Name="Reject" Type="bit" />
+    <Property Name="CreadedDateTime" Type="datetime" />
+    <Property Name="UpdatedDateTime" Type="datetime" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+    <Property Name="PublicHolidaysId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="tbl_Calendar" EntityType="Self.tbl_Calendar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_LeaveRequest" EntityType="Self.tbl_LeaveRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_PublicHolidays" EntityType="Self.tbl_PublicHolidays" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vw_Calendar" EntityType="Self.Vw_Calendar" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vw_Calendar].[Expr1] AS [Expr1], 
+    [Vw_Calendar].[LeaveRequestId] AS [LeaveRequestId], 
+    [Vw_Calendar].[EmployeeName] AS [EmployeeName], 
+    [Vw_Calendar].[Department] AS [Department], 
+    [Vw_Calendar].[LeaveType] AS [LeaveType], 
+    [Vw_Calendar].[FromDate] AS [FromDate], 
+    [Vw_Calendar].[ToDate] AS [ToDate], 
+    [Vw_Calendar].[Notes] AS [Notes], 
+    [Vw_Calendar].[Sign] AS [Sign], 
+    [Vw_Calendar].[Approve] AS [Approve], 
+    [Vw_Calendar].[Reject] AS [Reject], 
+    [Vw_Calendar].[CreadedDateTime] AS [CreadedDateTime], 
+    [Vw_Calendar].[UpdatedDateTime] AS [UpdatedDateTime], 
+    [Vw_Calendar].[UserId] AS [UserId], 
+    [Vw_Calendar].[PublicHolidaysId] AS [PublicHolidaysId], 
+    [Vw_Calendar].[Name] AS [Name], 
+    [Vw_Calendar].[Date] AS [Date]
+    FROM [dbo].[Vw_Calendar] AS [Vw_Calendar]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

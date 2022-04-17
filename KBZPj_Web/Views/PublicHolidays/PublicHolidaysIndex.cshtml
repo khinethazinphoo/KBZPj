@@ -1,0 +1,159 @@
+﻿
+<div class="jumbotron" style="margin-top:20px;">
+    <form>
+        <div class="row">
+            <h3>Public Holidays Form</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Holidays Name</label>
+                    <input type="text" class="form-control" id="txtName">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Date</label>
+                    <input id="txtDate" width="276" class="form-control" />
+                    @*<input type="text" datepicker class="form-control show-datepicker" id="txtDate">*@
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" id="btnClear">Clear</button>
+        <button type="button" class="btn btn-primary" id="btnSubmit">Submit</button>
+    </form>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            //var today = new Date();
+            //var day = today.getDate();
+            //var startDate = day + 1;
+
+            //$(".show-datepicker").datepicker({
+            //    format: 'dd-mm-yyyy',
+            //    startDate: startDate
+            //});
+
+            $('#txtDate').datepicker({
+                format: 'dd-mm-yyyy'
+            });
+
+            $("#btnSubmit").click(function () {
+                var HolidaysUrl = '/PublicHolidays/PublicHolidaysConfirm';
+                var l_Name = $('#txtName').val();
+                var l_Date = $('#txtDate').val();
+                var fromDateAr = l_Date.split('-');
+                var Date = fromDateAr[1] + '/' + fromDateAr[0] + '/' + fromDateAr[2];
+                if (l_Name == null || l_Name == "") {
+                    WarningMsg("Holidays Name is required.");
+                    return;
+                }
+                if (l_Date == null || l_Date == "") {
+                    WarningMsg("Date is required.");
+                    return;
+                }
+
+                var l_reqModel = {
+                    Name: l_Name,
+                    Date: Date
+                }
+                asyncAjax(HolidaysUrl, { reqModel: l_reqModel }).then((data) => {
+                    var res = data;
+                    var resUrl = res.RedirectUrl;
+                    if (resUrl != null && resUrl != '') {
+                        window.location.href = resUrl;
+                        //alert("Successfully");
+                    }
+                    else {
+                        //ShowMsg(JSON.stringify(res));
+                        ShowMsgResponse(res.Response);
+                    }
+                });
+            });
+
+            $("#btnClear").click(function (e) {
+                e.preventDefault();
+                $("#txtName").val('');
+                $("#txtDate").val('');
+            });
+        })
+
+        function asyncAjax(url, data) {
+            return new Promise(function (resolve, reject) {
+                //$.ajax({
+                //    url: url,
+                //    type: "POST",
+                //    dataType: "json",
+                //    data: data,
+                //    beforeSend: function () {
+                //    },
+                //    success: function (data) {
+                //        resolve(data); // Resolve promise and when success
+                //    },
+                //    error: function (xhr, exception) {
+                //        Ladda.stopAll();
+                //        if ($("#divLoading").length) {
+                //            enableDiv("#divLoading");
+                //        }
+                //        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                //    }
+                //});
+
+                var params = data;
+                var antiForgeryToken = $("input[name=__RequestVerificationToken]").val();
+                $.postJson(url, params,
+                    function success(data) {
+                        resolve(data);
+                    },
+                    function error(xhr, exception) {
+                        //Ladda.stopAll();
+                        if ($("#divLoading").length) {
+                            enableDiv("#divLoading");
+                        }
+                        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                    }, antiForgeryToken
+                );
+            });
+        }
+
+        jQuery.postJson = function (url, data, success, error, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+
+            return jQuery.ajax(ajax);
+        };
+
+        jQuery.postJson = function (url, data, success, error, antiForgeryToken, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            //if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+            if (antiForgeryToken) {
+                ajax.headers = {
+                    "__RequestVerificationToken": antiForgeryToken
+                };
+            };
+
+            return jQuery.ajax(ajax);
+        };
+
+    </script>
+}

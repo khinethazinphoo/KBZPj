@@ -1,0 +1,87 @@
+﻿@model KBZPj_Web.Models.LeaveRequestViewModel
+@{
+    ViewBag.Title = "Leave Request Form";
+    bool isMsgShow = false;
+    var aa = ViewData["Success"];
+    if (Model.IsSuccess == true)
+    {
+        isMsgShow = true;
+    }
+}
+<form action="/LeaveRequest/FinalConfirm" method="post">
+
+    <div class="row" id="divLoading">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                </div>
+                <div class="card-block">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputFromAccount"><b>Employee Name</b></label>
+                                    <div>@Model.EmployeeName</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputFromAccount"><b>Department</b></label>
+                                    <div>@Model.Department</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputToAccount"><b>LeaveType</b></label>
+                                    <div>@Model.LeaveType</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputAmount"><b>FromDate</b></label>
+                                    <div>@Model.FromDate</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputAmount"><b>ToDate</b></label>
+                                    <div>@Model.ToDate</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                @if (Model.IsSuccess == true)
+                                {
+                                    <a href="/LeaveRequest/LeaveRequestIndex" class="btn btn-primary btn-square">OK</a>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-secondary btn-square" type="button" id="btnBack" onclick="window.location.href='/LeaveRequest/LeaveRequestIndex'">Back</button>
+                                    <button class="btn btn-primary btn-square" id="btnConfirm" type="submit">Submit</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    @if (isMsgShow)
+    {
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Leave  Request is Successfully',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    }
+}

@@ -1,0 +1,291 @@
+﻿@{
+
+}
+
+<div class="jumbotron" style="margin-top:20px;">
+    <form>
+        <div class="row">
+            <h3>Leave Application Form</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Date</label>
+                    <input id="txtDate" width="276" class="form-control" />
+                    @*<input type="text" class="form-control" id="txtDate">*@
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">EmployeeName</label>
+                    <input type="text" class="form-control" id="txtName">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Department</label>
+                    <input type="text" class="form-control" id="txtDept">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Reason For requested leave</label>
+                    <select name="" id="txtleaveType" class="form-control">
+                        <option value="Select One">Select One</option>
+                        <option value="Annual">Annual Leave</option>
+                        <option value="Bereavement">Bereavement Leave</option>
+                        <option value="Maternity">Maternity Leave</option>
+                        <option value="Parental">Parental Leave</option>
+                        <option value="Unpaid">Unpaid Leave</option>
+                        <option value="Sick">Sick Leave</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    @*<div class="row">
+                            <div class="col-md-12">
+                                <input type="checkbox" id="txtAnnual"> Annual Leave
+                                <input type="checkbox" id="txtPhoneNo"> Bereavement Leave
+                                <input type="checkbox" id="txtPhoneNo"> Maternity Leave
+                                <input type="checkbox" id="txtPhoneNo"> Parental Leave
+                                <input type="checkbox" id="txtPhoneNo"> Unpaid Leave
+                                <input type="checkbox" id="txtPhoneNo"> Sick Leave
+                                <input type="checkbox" id="txtPhoneNo"> Other
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Date Requested From</label>
+                    <input width="276" class="form-control" id="txtFromDate" />To
+                    <input width="276" class="form-control" id="txtToDate" />
+                    @*<input type="text" class="form-control show-datepicker" id="txtFromDate"> To
+                        <input type="text" datepicker class="form-control show-datepicker" id="txtToDate">*@
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Notes</label>
+                    <input type="text" class="form-control" id="txtNote">
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-default" id="btnClear">Clear</button>
+        <button type="button" class="btn btn-primary" id="btnSubmit">Submit</button>
+    </form>
+</div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            $('#txtDate').datepicker({
+                format: 'dd-mm-yyyy',
+                disableDates: function (date) {
+                    // allow for today
+                    const currentDate = new Date().setHours(0, 0, 0, 0);
+                    return date.setHours(0, 0, 0, 0) >= currentDate ? true : false;
+                }
+            });
+
+            $('#txtToDate').datepicker({
+                format: 'dd-mm-yyyy',
+                disableDates: function (date) {
+                    // allow for today
+                    const currentDate = new Date().setHours(0, 0, 0, 0);
+                    return date.setHours(0, 0, 0, 0) >= currentDate ? true : false;
+                }
+            });
+
+            $('#txtFromDate').datepicker({
+                format: 'dd-mm-yyyy',
+                disableDates: function (date) {
+                    // allow for today
+                    const currentDate = new Date().setHours(0, 0, 0, 0);
+                    return date.setHours(0, 0, 0, 0) >= currentDate ? true : false;
+                }
+            });
+
+            //var today = new Date();
+            //var day = today.getDate();
+            //var startDate = day + 1;
+
+            $("#txtDate").datepicker({
+                format: 'dd-mm-yyyy',
+                maxDate: 0
+            });
+
+            var minDate = (new Date(2020, 1, 15)).getTime(),
+                maxDate = (new Date(2020, 2, 25)).getTime();
+
+            $("#txtDate").datepicker({
+                isDisabled: function (date) {
+                    date = date.getTime();
+
+                    return (date < minDate || date > maxDate) ? true : false;
+                }
+            });
+
+            $("#btnSubmit").click(function () {
+                var EmployeeUrl = '/LeaveRequest/LeaveRequestConfirm';
+                var l_Name = $('#txtName').val();
+                var l_Dept = $('#txtDept').val();
+                var l_Date = $('#txtDate').val();
+                //console.log(l_Date);
+                var dateAr = l_Date.split('-');
+                var Date = dateAr[1] + '/' + dateAr[0] + '/' + dateAr[2];
+                //console.log(newDate);
+                //var date = date.toString('MM/dd/yyyy');
+                //console.log(date);
+                var l_FromDate = $('#txtFromDate').val();
+                var fromDateAr = l_FromDate.split('-');
+                var FromDate = fromDateAr[1] + '/' + fromDateAr[0] + '/' + fromDateAr[2];
+                var l_ToDate = $('#txtToDate').val();
+                var toDateAr = l_ToDate.split('-');
+                var ToDate = toDateAr[1] + '/' + toDateAr[0] + '/' + toDateAr[2];
+                var l_LeaveType = $('#txtleaveType  option:selected').text();
+                //var l_LeaveType = $('#txtAnnual').val();
+                var l_Note = $('#txtNote').val();
+
+                if (l_Date == null || l_Date == "") {
+                    WarningMsg("Date is required.");
+                    return;
+                }
+                if (l_Name == null || l_Name == "") {
+                    WarningMsg("Employee Name is required.");
+                    return;
+                }
+                if (l_Dept == null || l_Dept == "") {
+                    WarningMsg("Department is required.");
+                    return;
+                }
+                if (l_FromDate == null || l_FromDate == "") {
+                    WarningMsg("FromDate is required.");
+                    return;
+                }
+                if (l_ToDate == null || l_ToDate == "") {
+                    WarningMsg("ToDate is required.");
+                    return;
+                }
+                if (l_LeaveType == null || l_LeaveType == "" || l_LeaveType == "Select One") {
+                    WarningMsg("Leave Type is required.");
+                    return;
+                }
+                if (l_Note == null || l_Note == "") {
+                    WarningMsg("Note is required.");
+                    return;
+                }
+
+                var l_reqModel = {
+                    EmployeeName: l_Name,
+                    Department: l_Dept,
+                    Date: Date,
+                    FromDate: FromDate,
+                    ToDate: ToDate,
+                    LeaveType: l_LeaveType,
+                    Note: l_Note
+                }
+                asyncAjax(EmployeeUrl, { reqModel: l_reqModel }).then((data) => {
+                    var res = data;
+                    var resUrl = res.RedirectUrl;
+                    if (resUrl != null && resUrl != '') {
+                        window.location.href = resUrl;
+                        //alert("Successfully");
+                    }
+                    else {
+                        //ShowMsg(JSON.stringify(res));
+                        ShowMsgResponse(res.Response);
+                    }
+                });
+            });
+
+            $("#btnClear").click(function (e) {
+                e.preventDefault();
+                $("#txtName").val('');
+                $("#txtDept").val('');
+                $("#txtDate").val('');
+                $("#txtFromDate").val('');
+                $("#txtToDate").val('');
+                $("#txtleaveType").val('');
+                $("#txtNote").val('');
+            });
+        })
+
+        function asyncAjax(url, data) {
+            return new Promise(function (resolve, reject) {
+                //$.ajax({
+                //    url: url,
+                //    type: "POST",
+                //    dataType: "json",
+                //    data: data,
+                //    beforeSend: function () {
+                //    },
+                //    success: function (data) {
+                //        resolve(data); // Resolve promise and when success
+                //    },
+                //    error: function (xhr, exception) {
+                //        Ladda.stopAll();
+                //        if ($("#divLoading").length) {
+                //            enableDiv("#divLoading");
+                //        }
+                //        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                //    }
+                //});
+
+                var params = data;
+                var antiForgeryToken = $("input[name=__RequestVerificationToken]").val();
+                $.postJson(url, params,
+                    function success(data) {
+                        resolve(data);
+                    },
+                    function error(xhr, exception) {
+                        //Ladda.stopAll();
+                        if ($("#divLoading").length) {
+                            enableDiv("#divLoading");
+                        }
+                        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                    }, antiForgeryToken
+                );
+            });
+        }
+
+        jQuery.postJson = function (url, data, success, error, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+
+            return jQuery.ajax(ajax);
+        };
+
+        jQuery.postJson = function (url, data, success, error, antiForgeryToken, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            //if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+            if (antiForgeryToken) {
+                ajax.headers = {
+                    "__RequestVerificationToken": antiForgeryToken
+                };
+            };
+
+            return jQuery.ajax(ajax);
+        };
+
+    </script>
+}

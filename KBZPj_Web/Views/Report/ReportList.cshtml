@@ -1,0 +1,56 @@
+﻿@model IEnumerable<KBZPj_Web.Models.LeaveRequestModel>
+
+<div class="jumbotron" style="margin-top:10px;">
+    <h3>Leave Request List</h3>
+
+    <table class="table pt-2">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeaveType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <a href="/Report/ReportIndex" class="btn btn-secondary btn-square">Back</a>
+</div>
+
+<a href="/Report/Download_PDF" class="btn btn-primary btn-square"><span>Export Pdf</span></a>
+<a href="/Report/Export" class="btn btn-primary btn-square"><span>Export Excel</span></a>

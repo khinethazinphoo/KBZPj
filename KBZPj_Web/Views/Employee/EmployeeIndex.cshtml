@@ -1,0 +1,217 @@
+﻿@model KBZPj_Web.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "EmployeeIndex";
+}
+
+<div class="jumbotron" style="margin-top:20px;">
+    <form>
+        <card>
+            <div class="row">
+                <h3>Employee Registration Form</h3>
+            </div>
+            <hr />
+            <div class="row pt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input type="text" class="form-control" id="txtName">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Age</label>
+                        <input type="text" class="form-control" id="txtAge" onkeypress="return isNumberKey(event)">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Gender</label>
+                        <select name="cars" id="txtGender" class="form-control">
+                            <option value="Select One">Select One</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">PhoneNo</label>
+                        <input type="text" class="form-control" id="txtPhoneNo" onkeypress="return isNumberKey(event)">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Email</label>
+                        <input type="text" class="form-control" id="txtEmail">
+                    </div>
+                </div>
+            </div>
+        </card>
+
+        <button type="button" class="btn btn-default" id="btnClear">Clear</button>
+        <button type="button" class="btn btn-primary" id="btnSubmit">Submit</button>
+    </form>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#datepicker-disable").datepicker({
+               minDate: 0
+            });
+
+            $("#btnSubmit").click(function () {
+                var EmployeeUrl = '/Employee/EmployeeConfirm ';
+                var l_Name = $('#txtName').val();
+                var l_Age = $('#txtAge').val();
+                var l_Gender = $('#txtGender  option:selected').text();
+                var l_PhoneNo = $('#txtPhoneNo').val();
+                var l_Email = $('#txtEmail').val();
+
+                if (l_Name == null || l_Name == "") {
+                    WarningMsg("Employee Name is required.");
+                    return;
+                }
+                if (l_Age == null || l_Age == "") {
+                    WarningMsg("Age is required.");
+                    return;
+                }
+                if (l_Gender == null || l_Gender == "" || l_Gender == "Select One") {
+                    WarningMsg("Gender is required.");
+                    return;
+                }
+                if (l_PhoneNo == null || l_PhoneNo == "") {
+                    WarningMsg("PhoneNumber is required.");
+                    return;
+                } if (l_Email == null || l_Email == "") {
+                    WarningMsg("Email is required.");
+                    return;
+                }
+
+                var l_reqModel = {
+                    EmployeeName: l_Name,
+                    Age: l_Age,
+                    Gender: l_Gender,
+                    PhoneNumber: l_PhoneNo,
+                    Email: l_Email,
+                }
+                asyncAjax(EmployeeUrl, { reqModel: l_reqModel }).then((data) => {
+                    var res = data;
+                    console.log(res);
+                    var resUrl = res.RedirectUrl;
+                    if (resUrl != null && resUrl != '') {
+
+                        //alert("Successfully");
+                        //Swal.fire({
+                        //    position: 'top-end',
+                        //    icon: 'success',
+                        //    title: 'Employee Register is Successfully',
+                        //    showConfirmButton: false,
+                        //    timer: 2000
+                        //})
+                        window.location.href = resUrl;
+                    }
+                    else {
+                        alert('failed');
+                    }
+                });
+            });
+
+            $("#btnClear").click(function (e) {
+                e.preventDefault();
+                $("#txtName").val('');
+                $("#txtAge").val('');
+                $("#txtGender").val('');
+                $("#txtPhoneNo").val('');
+                $("#txtEmail").val('');
+            });
+
+        })
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+        function asyncAjax(url, data) {
+            return new Promise(function (resolve, reject) {
+                //$.ajax({
+                //    url: url,
+                //    type: "POST",
+                //    dataType: "json",
+                //    data: data,
+                //    beforeSend: function () {
+                //    },
+                //    success: function (data) {
+                //        resolve(data); // Resolve promise and when success
+                //    },
+                //    error: function (xhr, exception) {
+                //        Ladda.stopAll();
+                //        if ($("#divLoading").length) {
+                //            enableDiv("#divLoading");
+                //        }
+                //        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                //    }
+                //});
+
+                var params = data;
+                var antiForgeryToken = $("input[name=__RequestVerificationToken]").val();
+                $.postJson(url, params,
+                    function success(data) {
+                        resolve(data);
+                    },
+                    function error(xhr, exception) {
+                        //Ladda.stopAll();
+                        if ($("#divLoading").length) {
+                            enableDiv("#divLoading");
+                        }
+                        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                    }, antiForgeryToken
+                );
+            });
+        }
+
+        jQuery.postJson = function (url, data, success, error, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+
+            return jQuery.ajax(ajax);
+        };
+
+        jQuery.postJson = function (url, data, success, error, antiForgeryToken, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            //if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+            if (antiForgeryToken) {
+                ajax.headers = {
+                    "__RequestVerificationToken": antiForgeryToken
+                };
+            };
+
+            return jQuery.ajax(ajax);
+        };
+    </script>
+}

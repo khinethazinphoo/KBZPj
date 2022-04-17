@@ -1,0 +1,160 @@
+﻿@model IEnumerable<KBZPj_Web.Models.EmployeeModel>
+
+
+<div class="jumbotron" style="margin-top:10px;">
+    <h3>Employee List</h3>
+
+    <table class="table pt-2">
+        <tr>
+            <th hidden></th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden class="id">@Html.DisplayFor(modelItem => item.EmployeeId)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary btnModify" >Modify</button>
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $(".btnModify").click(function () {
+                var EmployeeUrl = '/Employee/EmployeeModify';
+                var tr = $(this).parents("tr");
+                var l_EmployeeId = tr.find('.id').text();
+                //var l_EmployeeId = $(this).closest('tr').find('.id').text();
+                var l_reqModel = {
+                    EmployeeId: l_EmployeeId
+                }
+                asyncAjax(EmployeeUrl, { reqModel: l_reqModel }).then((data) => {
+                    var res = data;
+                    var resUrl = res.RedirectUrl;
+                    if (resUrl != null && resUrl != '') {
+                        window.location.href = resUrl;
+                    }
+                    else {
+                        alert('failed');
+                    }
+                });
+            });
+        })
+
+       
+
+        function asyncAjax(url, data) {
+            return new Promise(function (resolve, reject) {
+                //$.ajax({
+                //    url: url,
+                //    type: "POST",
+                //    dataType: "json",
+                //    data: data,
+                //    beforeSend: function () {
+                //    },
+                //    success: function (data) {
+                //        resolve(data); // Resolve promise and when success
+                //    },
+                //    error: function (xhr, exception) {
+                //        Ladda.stopAll();
+                //        if ($("#divLoading").length) {
+                //            enableDiv("#divLoading");
+                //        }
+                //        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                //    }
+                //});
+
+                var params = data;
+                var antiForgeryToken = $("input[name=__RequestVerificationToken]").val();
+                $.postJson(url, params,
+                    function success(data) {
+                        resolve(data);
+                    },
+                    function error(xhr, exception) {
+                        //Ladda.stopAll();
+                        if ($("#divLoading").length) {
+                            enableDiv("#divLoading");
+                        }
+                        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                    }, antiForgeryToken
+                );
+            });
+        }
+
+        jQuery.postJson = function (url, data, success, error, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+
+            return jQuery.ajax(ajax);
+        };
+
+        jQuery.postJson = function (url, data, success, error, antiForgeryToken, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            //if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+            if (antiForgeryToken) {
+                ajax.headers = {
+                    "__RequestVerificationToken": antiForgeryToken
+                };
+            };
+
+            return jQuery.ajax(ajax);
+        };
+    </script>
+}

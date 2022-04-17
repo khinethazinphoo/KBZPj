@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "ReportIndex";
+}
+
+
+<div class="jumbotron" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1">EmployeeName</label>
+                <input type="text" class="form-control" id="txtName">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Department</label>
+                <input type="text" class="form-control" id="txtDept">
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-default" id="btnSearch">Search</button>
+</div>
+<div class="jumbotron" style="margin-top: 20px; display: none;">
+    <div class="card" id="divReport">
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+          
+
+            $("#btnSearch").click(function () {
+                var l_Name = $('#txtName').val(); 
+                var l_Dept = $('#txtDept').val();
+                var l_reqModel = { EmployeeName: l_Name, Department: l_Dept };
+                //var url = 'Report/Search';
+                var listUrl = '/Report/ReportList';
+
+                asyncAjax(listUrl, { reqModel: l_reqModel }).then((data) => {
+                    var res = data;
+                    var resUrl = res.RedirectUrl;
+                    if (resUrl != null && resUrl != '') {
+                        window.location.href = resUrl;
+                        //alert("Successfully");
+                    }
+                    else {
+                        //ShowMsg(JSON.stringify(res));
+                        ShowMsgResponse(res.Response);
+                    }
+                });
+            });
+        })
+
+        function asyncAjax(url, data) {
+            return new Promise(function (resolve, reject) {
+                //$.ajax({
+                //    url: url,
+                //    type: "POST",
+                //    dataType: "json",
+                //    data: data,
+                //    beforeSend: function () {
+                //    },
+                //    success: function (data) {
+                //        resolve(data); // Resolve promise and when success
+                //    },
+                //    error: function (xhr, exception) {
+                //        Ladda.stopAll();
+                //        if ($("#divLoading").length) {
+                //            enableDiv("#divLoading");
+                //        }
+                //        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                //    }
+                //});
+
+                var params = data;
+                var antiForgeryToken = $("input[name=__RequestVerificationToken]").val();
+                $.postJson(url, params,
+                    function success(data) {
+                        resolve(data);
+                    },
+                    function error(xhr, exception) {
+                        //Ladda.stopAll();
+                        if ($("#divLoading").length) {
+                            enableDiv("#divLoading");
+                        }
+                        reject(error(xhr, exception)); // Reject the promise and go to catch()
+                    }, antiForgeryToken
+                );
+            });
+        }
+
+        jQuery.postJson = function (url, data, success, error, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+
+            return jQuery.ajax(ajax);
+        };
+
+        jQuery.postJson = function (url, data, success, error, antiForgeryToken, dataType) {
+            if (dataType === void 0) { dataType = "json"; }
+            //if (typeof (data) === "object") { data = JSON.stringify(data); }
+            var ajax = {
+                url: url,
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                dataType: dataType,
+                data: data,
+                success: success,
+                error: error
+            };
+            if (antiForgeryToken) {
+                ajax.headers = {
+                    "__RequestVerificationToken": antiForgeryToken
+                };
+            };
+
+            return jQuery.ajax(ajax);
+        };
+
+    </script>
+}

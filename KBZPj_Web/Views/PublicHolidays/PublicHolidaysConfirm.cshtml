@@ -1,0 +1,69 @@
+﻿@model KBZPj_Web.Models.PublicHolidaysViewModel
+@{
+    ViewBag.Title = "EmployeeConfirm";
+    bool isMsgShow = false;
+    var aa = ViewData["Success"];
+    if (Model.IsSuccess == true)
+    {
+        isMsgShow = true;
+    }
+}
+
+<form action="/PublicHolidays/FinalConfirm" method="post">
+
+    <div class="row" id="divLoading">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@ViewBag.Title</h5>
+                </div>
+                <div class="card-block">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputFromAccount"><b>Name</b></label>
+                                    <div>@Model.Name</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputFromAccount"><b>Date</b></label>
+                                    <div>@Model.Date</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                @if (Model.IsSuccess == true)
+                                {
+                                    <a href="/PublicHolidays/PublicHolidaysIndex" class="btn btn-primary btn-square">OK</a>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-secondary btn-square" type="button" id="btnBack" onclick="window.location.href='/PublicHolidays/PublicHolidaysIndex'">Back</button>
+                                    <button class="btn btn-primary btn-square" id="btnConfirm" type="submit">Submit</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    @if (isMsgShow)
+    {
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Employee Register is Successfully',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    }
+}

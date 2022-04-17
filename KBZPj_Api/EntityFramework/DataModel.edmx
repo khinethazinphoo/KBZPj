@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Calendar">
+          <Key>
+            <PropertyRef Name="CalendarId" />
+          </Key>
+          <Property Name="CalendarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="LeaveType" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="EndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreadedDateTime" Type="datetime" />
+          <Property Name="UpdatedDateTime" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_LeaveRequest">
+          <Key>
+            <PropertyRef Name="LeaveRequestId" />
+          </Key>
+          <Property Name="LeaveRequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeaveType" Type="nvarchar" MaxLength="20" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreadedDateTime" Type="datetime" />
+          <Property Name="UpdatedDateTime" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_PublicHolidays">
+          <Key>
+            <PropertyRef Name="PublicHolidaysId" />
+          </Key>
+          <Property Name="PublicHolidaysId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KBZPj.dbo.Vw_Calendar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Vw_Calendar">
+          <Key>
+            <PropertyRef Name="LeaveRequestId" />
+            <PropertyRef Name="PublicHolidaysId" />
+          </Key>
+          <Property Name="Expr1" Type="datetime" />
+          <Property Name="LeaveRequestId" Type="int" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeaveType" Type="nvarchar" MaxLength="20" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="200" />
+          <Property Name="Sign" Type="nchar" MaxLength="10" />
+          <Property Name="Approve" Type="bit" />
+          <Property Name="Reject" Type="bit" />
+          <Property Name="CreadedDateTime" Type="datetime" />
+          <Property Name="UpdatedDateTime" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="PublicHolidaysId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="DataModelStoreContainer">
+          <EntitySet Name="tbl_Calendar" EntityType="Self.tbl_Calendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_LeaveRequest" EntityType="Self.tbl_LeaveRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_PublicHolidays" EntityType="Self.tbl_PublicHolidays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vw_Calendar" EntityType="Self.Vw_Calendar" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_Calendar].[Expr1] AS [Expr1], 
+    [Vw_Calendar].[LeaveRequestId] AS [LeaveRequestId], 
+    [Vw_Calendar].[EmployeeName] AS [EmployeeName], 
+    [Vw_Calendar].[Department] AS [Department], 
+    [Vw_Calendar].[LeaveType] AS [LeaveType], 
+    [Vw_Calendar].[FromDate] AS [FromDate], 
+    [Vw_Calendar].[ToDate] AS [ToDate], 
+    [Vw_Calendar].[Notes] AS [Notes], 
+    [Vw_Calendar].[Sign] AS [Sign], 
+    [Vw_Calendar].[Approve] AS [Approve], 
+    [Vw_Calendar].[Reject] AS [Reject], 
+    [Vw_Calendar].[CreadedDateTime] AS [CreadedDateTime], 
+    [Vw_Calendar].[UpdatedDateTime] AS [UpdatedDateTime], 
+    [Vw_Calendar].[UserId] AS [UserId], 
+    [Vw_Calendar].[PublicHolidaysId] AS [PublicHolidaysId], 
+    [Vw_Calendar].[Name] AS [Name], 
+    [Vw_Calendar].[Date] AS [Date]
+    FROM [dbo].[Vw_Calendar] AS [Vw_Calendar]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Calendar" EntityType="DataModel.tbl_Calendar" />
+          <EntitySet Name="tbl_Employee" EntityType="DataModel.tbl_Employee" />
+          <EntitySet Name="tbl_LeaveRequest" EntityType="DataModel.tbl_LeaveRequest" />
+          <EntitySet Name="tbl_PublicHolidays" EntityType="DataModel.tbl_PublicHolidays" />
+          <EntitySet Name="Vw_Calendar" EntityType="DataModel.Vw_Calendar" />
+        </EntityContainer>
+        <EntityType Name="tbl_Calendar">
+          <Key>
+            <PropertyRef Name="CalendarId" />
+          </Key>
+          <Property Name="CalendarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="LeaveType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreadedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_LeaveRequest">
+          <Key>
+            <PropertyRef Name="LeaveRequestId" />
+          </Key>
+          <Property Name="LeaveRequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeaveType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FromDate" Type="DateTime" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreadedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_PublicHolidays">
+          <Key>
+            <PropertyRef Name="PublicHolidaysId" />
+          </Key>
+          <Property Name="PublicHolidaysId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vw_Calendar">
+          <Key>
+            <PropertyRef Name="LeaveRequestId" />
+            <PropertyRef Name="PublicHolidaysId" />
+          </Key>
+          <Property Name="Expr1" Type="DateTime" Precision="3" />
+          <Property Name="LeaveRequestId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeaveType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FromDate" Type="DateTime" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sign" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Approve" Type="Boolean" />
+          <Property Name="Reject" Type="Boolean" />
+          <Property Name="CreadedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PublicHolidaysId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataEntities">
+          <EntitySetMapping Name="tbl_Calendar">
+            <EntityTypeMapping TypeName="DataModel.tbl_Calendar">
+              <MappingFragment StoreEntitySet="tbl_Calendar">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Employee">
+            <EntityTypeMapping TypeName="DataModel.tbl_Employee">
+              <MappingFragment StoreEntitySet="tbl_Employee">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UpdatedDateTime" ColumnName="UpdatedDateTime" />
+                <ScalarProperty Name="CreadedDateTime" ColumnName="CreadedDateTime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_LeaveRequest">
+            <EntityTypeMapping TypeName="DataModel.tbl_LeaveRequest">
+              <MappingFragment StoreEntitySet="tbl_LeaveRequest">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UpdatedDateTime" ColumnName="UpdatedDateTime" />
+                <ScalarProperty Name="CreadedDateTime" ColumnName="CreadedDateTime" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="LeaveRequestId" ColumnName="LeaveRequestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_PublicHolidays">
+            <EntityTypeMapping TypeName="DataModel.tbl_PublicHolidays">
+              <MappingFragment StoreEntitySet="tbl_PublicHolidays">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PublicHolidaysId" ColumnName="PublicHolidaysId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_Calendar">
+            <EntityTypeMapping TypeName="DataModel.Vw_Calendar">
+              <MappingFragment StoreEntitySet="Vw_Calendar">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PublicHolidaysId" ColumnName="PublicHolidaysId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UpdatedDateTime" ColumnName="UpdatedDateTime" />
+                <ScalarProperty Name="CreadedDateTime" ColumnName="CreadedDateTime" />
+                <ScalarProperty Name="Reject" ColumnName="Reject" />
+                <ScalarProperty Name="Approve" ColumnName="Approve" />
+                <ScalarProperty Name="Sign" ColumnName="Sign" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="LeaveRequestId" ColumnName="LeaveRequestId" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

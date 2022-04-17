@@ -1,0 +1,162 @@
+﻿
+@{
+    <style>
+        td.fc-today {
+            color: blue !important;
+            background: red;
+        }
+
+        td .fc-sun {
+            color: red !important;
+            background-color: red;
+        }
+
+        td .fc-sat {
+            color: red !important;
+        }
+        /*
+        td .fc-today {
+            background-color: #10CC55 !important;
+        }*/
+        .fc-event {
+            background: red !important;
+        }
+
+        .fc-content {
+            background-color: #FFFFFF;
+        }
+
+        .fc-event {
+            color: red !important;
+            text-decoration: none
+        }
+        /* .orange {
+            background-color:red;
+        }*/
+    </style>
+
+}
+
+<div id="calendar" class="mt-4"></div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //var data = { "programs": [{ "name": "zonealarm", "price": "500" }, { "name": "kaspersky", "price": "200" }] };
+            //alert(data.programs[0].name);
+            //$.each(data.programs, function (key, val) {
+            //    alert(key + val);
+            //});
+
+            //var data = { "programs": [{ "name": "zonealarm", "price": "500" }, { "name": "kaspersky", "price": "200" }] };
+
+            //$.each(data.programs, function (i) {
+            //    $.each(data.programs[i], function (key, val) {
+            //        alert();
+            //        data.push({
+            //            Name: val.name,
+            //            date: val.Date,
+            //            resp: val.RespDesp
+            //            //description: v.Description,
+            //            //start: moment(v.Start),
+            //            //end: v.End != null ? monent(v.End) : null,
+            //            //color: v.ThemeColor,
+            //            //allDay: v.IsFullDay
+            //        });
+            //    });
+            //});
+
+            //var array = [];
+            //var element = "anything you want in the array";
+            //array.push(element);
+            //alert(array);
+
+            var events = [];
+            $.ajax({
+                type: "GET",
+                url: "/Calendar/GetEvents",
+                success: function (data) {
+                    var res = data;
+                    //console.log(res);
+
+                    var l = res.data;
+
+                    //events = res;
+                    //alert(JSON.parse(JSON.stringify(events)));
+                    //console.log(JSON.parse(events));
+                    //for (i = 0; i < events.length; i++) {
+
+                    //    // Push objects in the final array.
+                    //    events.push(JSON.parse(events[i]));
+                    //}
+
+                    $.each(l, function (i, v) {
+                        console.log(events);
+                        events.push({
+                            title: v.Name,
+                            start: v.Date,
+                            end: v.EndDate != null ? moment(v.EndDate) : null,
+                            backgroundColor: '#ED1317'
+                        });
+                    })
+
+                    GenerateCalendar(events);
+                },
+                error: function (error) {
+                    alert('failed');
+                }
+            })
+
+            function GenerateCalendar(events) {
+                $('#calendar').fullCalendar('destory');
+                $('#calendar').fullCalendar({
+                    contentHeight: 400,
+                    defaultDate: new Date(),
+                    height: 550,
+                    //timeformat: 'h(:mm)a',
+                    firstDay: 1,
+                    //header: {
+                    //    left: 'prev,next today',
+                    //    center: 'title',
+                    //    right: 'month,basicweek,basicDay'
+                    //},
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: "month,agendaWeek,agendaDay"
+                    },
+                    viewDisplay: function (view) {
+                        var now = new Date();
+                        var end = new Date();
+                        end.setMonth(now.getMonth() + 11); //Adjust as needed
+
+                        var cal_date_string = view.start.getMonth() + '/' + view.start.getFullYear();
+                        var cur_date_string = now.getMonth() + '/' + now.getFullYear();
+                        var end_date_string = end.getMonth() + '/' + end.getFullYear();
+
+                        if (cal_date_string == cur_date_string) { jQuery('.fc-button-prev').addClass("fc-state-disabled"); }
+                        else { jQuery('.fc-button-prev').removeClass("fc-state-disabled"); }
+
+                        if (end_date_string == cal_date_string) { jQuery('.fc-button-next').addClass("fc-state-disabled"); }
+                        else { jQuery('.fc-button-next').removeClass("fc-state-disabled"); }
+                    },
+                    eventLimit: true,
+                    eventColor: '',
+                    displayEventTime: false,
+                    eventBackgroundColor: '#378006',
+                    eventBorderColor: 'red',
+                    eventTextColor: 'blue',
+                    textColor: 'black',
+                    events: events
+                })
+            }
+
+            function getEventDate(events) {
+                var dateobj = events.start;
+                date = dateobj.getFullYear() + '-' + dateobj.getMonth() + 1 + '-' + dateobj.getDate();
+                return date;
+            }
+        })
+    </script>
+}
+
