@@ -1,0 +1,837 @@
+{
+	"info": {
+		"_postman_id": "8dddad1c-63b3-41f5-bdce-38e1ee594904",
+		"name": "KBZPj",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "SetEmployee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"EmployeeName\":\"Hla\",\r\n    \"Age\" :\"20\" ,\r\n    \"Gender\" : \"Male\",\r\n    \"Email\" : \"hla@gmail.com\",\r\n    \"PhoneNumber\" : \"09123456789\",\r\n    \"UserId\" : \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44349/api/SetEmployee",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44349",
+							"path": [
+								"api",
+								"SetEmployee"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"EmployeeName\":\"Hla\",\r\n    \"Age\" :\"20\" ,\r\n    \"Gender\" : \"Male\",\r\n    \"Email\" : \"hla@gmail.com\",\r\n    \"PhoneNumber\" : \"09123456789\",\r\n    \"UserId\" : \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44349/api/SetEmployee",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44349",
+									"path": [
+										"api",
+										"SetEmployee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319"
+								},
+								{
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RDpcS0JaUGpcS0JaUGpfQXBpXGFwaVxTZXRFbXBsb3llZQ==?="
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Apr 2022 17:48:47 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lstEmployee\": null,\n    \"RespCode\": \"000\",\n    \"RespDesp\": \"Create Successfully!!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GetEmployee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserId\": \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44349/api/GetEmployee",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44349",
+							"path": [
+								"api",
+								"GetEmployee"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserId\": \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44349/api/GetEmployee",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44349",
+									"path": [
+										"api",
+										"GetEmployee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319"
+								},
+								{
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RDpcS0JaUGpcS0JaUGpfQXBpXGFwaVxHZXRFbXBsb3llZQ==?="
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Apr 2022 17:51:40 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "460"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lstEmployee\": [\n        {\n            \"EmployeeName\": \"a\",\n            \"Age\": 1,\n            \"Gender\": \"Male\",\n            \"PhoneNumber\": 1,\n            \"Email\": \"dafdf\",\n            \"UserId\": \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\n        },\n        {\n            \"EmployeeName\": \"d\",\n            \"Age\": 5,\n            \"Gender\": \"Male\",\n            \"PhoneNumber\": 54654,\n            \"Email\": \"yfghfg\",\n            \"UserId\": \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\n        },\n        {\n            \"EmployeeName\": \"Hla\",\n            \"Age\": 20,\n            \"Gender\": \"Male\",\n            \"PhoneNumber\": 0,\n            \"Email\": \"hla@gmail.com\",\n            \"UserId\": \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\n        }\n    ],\n    \"RespCode\": \"000\",\n    \"RespDesp\": \"Create Successfully!!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "ModifyEmployee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"EmployeeName\":\"Hla\",\r\n    \"Age\" :\"21\" ,\r\n    \"Gender\" : \"Male\",\r\n    \"Email\" : \"hla@gmail.com\",\r\n    \"PhoneNumber\" : \"09123456789\",\r\n    \"UserId\" : \"89385865-0E5C-4235-A599-1EE8A2EFE432\",\r\n    \"EmployeeId\" : \"33\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44349/api/ModifyEmployee",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44349",
+							"path": [
+								"api",
+								"ModifyEmployee"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"EmployeeName\":\"Hla\",\r\n    \"Age\" :\"21\" ,\r\n    \"Gender\" : \"Male\",\r\n    \"Email\" : \"hla@gmail.com\",\r\n    \"PhoneNumber\" : \"09123456789\",\r\n    \"UserId\" : \"89385865-0E5C-4235-A599-1EE8A2EFE432\",\r\n    \"EmployeeId\" : \"33\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44349/api/ModifyEmployee",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44349",
+									"path": [
+										"api",
+										"ModifyEmployee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319"
+								},
+								{
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RDpcS0JaUGpcS0JaUGpfQXBpXGFwaVxNb2RpZnlFbXBsb3llZQ==?="
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Apr 2022 18:35:21 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lstEmployee\": null,\n    \"RespCode\": \"000\",\n    \"RespDesp\": \"Create Successfully!!\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PublicHolidays",
+			"item": [
+				{
+					"name": "SetPublicHolidays",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\":\"Mahar ThaKyan\",\r\n    \"Date\" :\"2022-04-13\" ,\r\n    \"UserId\" : \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44349/api/SetPublicHolidays",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44349",
+							"path": [
+								"api",
+								"SetPublicHolidays"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\":\"Mahar ThaKyan\",\r\n    \"Date\" :\"2022-04-13\" ,\r\n    \"UserId\" : \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44349/api/SetPublicHolidays",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44349",
+									"path": [
+										"api",
+										"SetPublicHolidays"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319"
+								},
+								{
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RDpcS0JaUGpcS0JaUGpfQXBpXGFwaVxTZXRQdWJsaWNIb2xpZGF5cw==?="
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Apr 2022 17:54:53 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lstModel\": null,\n    \"RespCode\": \"000\",\n    \"RespDesp\": \"Create Successfully!!\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\":\"Mahar ThaKyan\",\r\n    \"Date\" :\"2022-04-13\" ,\r\n    \"UserId\" : \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44349/api/SetPublicHolidays",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44349",
+									"path": [
+										"api",
+										"SetPublicHolidays"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319"
+								},
+								{
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RDpcS0JaUGpcS0JaUGpfQXBpXGFwaVxTZXRQdWJsaWNIb2xpZGF5cw==?="
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Apr 2022 17:54:53 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lstModel\": null,\n    \"RespCode\": \"000\",\n    \"RespDesp\": \"Create Successfully!!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GetPublicHolidays",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44349/api/GetPublicHolidays",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44349",
+							"path": [
+								"api",
+								"GetPublicHolidays"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44349/api/GetPublicHolidays",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44349",
+									"path": [
+										"api",
+										"GetPublicHolidays"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319"
+								},
+								{
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RDpcS0JaUGpcS0JaUGpfQXBpXGFwaVxHZXRQdWJsaWNIb2xpZGF5cw==?="
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Apr 2022 17:56:16 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1097"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lstModel\": [\n        {\n            \"Name\": \"ThanKyan\",\n            \"Date\": \"4/15/2022 12:00:00 AM\",\n            \"EmployeeName\": null,\n            \"LeaveType\": null,\n            \"FromDate\": null,\n            \"EndDate\": null\n        },\n        {\n            \"Name\": \"tt Annual Leave\",\n            \"Date\": \"4/15/2022 12:00:00 AM\",\n            \"EmployeeName\": null,\n            \"LeaveType\": null,\n            \"FromDate\": null,\n            \"EndDate\": \"4/16/2022 12:00:00 AM\"\n        },\n        {\n            \"Name\": \"ThaKyan\",\n            \"Date\": \"4/13/2022 12:00:00 AM\",\n            \"EmployeeName\": null,\n            \"LeaveType\": null,\n            \"FromDate\": null,\n            \"EndDate\": null\n        },\n        {\n            \"Name\": \"ThaKyan\",\n            \"Date\": \"4/14/2022 12:00:00 AM\",\n            \"EmployeeName\": null,\n            \"LeaveType\": null,\n            \"FromDate\": null,\n            \"EndDate\": null\n        },\n        {\n            \"Name\": \"tt Annual Leave\",\n            \"Date\": \"4/17/2022 12:00:00 AM\",\n            \"EmployeeName\": null,\n            \"LeaveType\": null,\n            \"FromDate\": null,\n            \"EndDate\": null\n        },\n        {\n            \"Name\": \"Mg Mg  Annual Leave\",\n            \"Date\": \"4/18/2022 12:00:00 AM\",\n            \"EmployeeName\": null,\n            \"LeaveType\": null,\n            \"FromDate\": null,\n            \"EndDate\": null\n        },\n        {\n            \"Name\": \"La La Maternity Leave\",\n            \"Date\": \"4/20/2022 12:00:00 AM\",\n            \"EmployeeName\": null,\n            \"LeaveType\": null,\n            \"FromDate\": null,\n            \"EndDate\": \"4/22/2022 12:00:00 AM\"\n        },\n        {\n            \"Name\": \"Mahar ThaKyan\",\n            \"Date\": \"4/13/2022 12:00:00 AM\",\n            \"EmployeeName\": null,\n            \"LeaveType\": null,\n            \"FromDate\": null,\n            \"EndDate\": null\n        }\n    ],\n    \"RespCode\": \"000\",\n    \"RespDesp\": \"Create Successfully!!\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "LeaveRequest",
+			"item": [
+				{
+					"name": "SetLeaveRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"EmployeeName\": \"Mya\",\r\n    \"Department\": \"IT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44349/api/GetLeaveRequest",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44349",
+							"path": [
+								"api",
+								"GetLeaveRequest"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"EmployeeName\": \"Mya\",\r\n    \"Department\": \"IT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44349/api/GetLeaveRequest",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44349",
+									"path": [
+										"api",
+										"GetLeaveRequest"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319"
+								},
+								{
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RDpcS0JaUGpcS0JaUGpfQXBpXGFwaVxHZXRMZWF2ZVJlcXVlc3Q=?="
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Apr 2022 18:07:04 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "217"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lstleave\": [\n        {\n            \"EmployeeName\": \"Mya\",\n            \"Department\": \"IT\",\n            \"LeaveType\": \"Annual Leave\",\n            \"FromDate\": \"4/19/2022 12:00:00 AM\",\n            \"ToDate\": \"4/19/2022 12:00:00 AM\",\n            \"Notes\": \"Test\"\n        }\n    ],\n    \"RespCode\": \"000\",\n    \"RespDesp\": \"Create Successfully!!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GetLeaveRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"EmployeeName\": \"Mya\",\r\n    \"Department\": \"IT\",\r\n    \"Date\": \"2022-04-19\",\r\n    \"FromDate\": \"2022-04-19\",\r\n    \"ToDate\": \"2022-04-19\",\r\n    \"LeaveType\": \"Annual Leave\",\r\n    \"Note\": \"Test\",\r\n    \"UserId\": \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44349/api/SetLeaveRequest",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44349",
+							"path": [
+								"api",
+								"SetLeaveRequest"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"EmployeeName\": \"Mya\",\r\n    \"Department\": \"IT\",\r\n    \"Date\": \"2022-04-19\",\r\n    \"FromDate\": \"2022-04-19\",\r\n    \"ToDate\": \"2022-04-19\",\r\n    \"LeaveType\": \"Annual Leave\",\r\n    \"Note\": \"Test\",\r\n    \"UserId\": \"89385865-0E5C-4235-A599-1EE8A2EFE432\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44349/api/SetLeaveRequest",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44349",
+									"path": [
+										"api",
+										"SetLeaveRequest"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Expires",
+									"value": "-1"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0"
+								},
+								{
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319"
+								},
+								{
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RDpcS0JaUGpcS0JaUGpfQXBpXGFwaVxTZXRMZWF2ZVJlcXVlc3Q=?="
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "ASP.NET"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 17 Apr 2022 18:06:33 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"lstleave\": null,\n    \"RespCode\": \"000\",\n    \"RespDesp\": \"Create Successfully!!\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
